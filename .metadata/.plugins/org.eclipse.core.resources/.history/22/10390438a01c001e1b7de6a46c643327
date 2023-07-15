@@ -1,0 +1,61 @@
+package hyundai;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+public class UserDAO {
+    private Connection conn;
+    private PreparedStatement ps;
+    private ResultSet rs;
+    
+    public UserDAO(){
+        try{    
+            String URL = "jdbc:mysql://localhost:3306/snrnsi0000";
+            String ID  = "root";
+            String PW  = "1234";
+
+            Class.forName("com.mysql.jdbc.Driver");
+            System.out.println("JDBC Driver 로드성공!");
+
+            conn = DriverManager.getConnection(URL, ID, PW);
+            System.out.println("데이터베이스 Connection 연결성공!");
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+    
+    
+    public int signup(UserDTO userDTO){
+        String SQL = "INSERT  INTO  userhyundai(user_id, user_pw, user_name, user_birth, user_hp, user_addr1, user_addr2, user_agree) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+        try{
+            ps = conn.prepareStatement(SQL);
+            ps.setString(1,  userDTO.getUser_id());
+            ps.setString(2,  userDTO.getUser_pw());
+            ps.setString(3,  userDTO.getUser_name());
+            ps.setString(4, userDTO.getUser_birth());
+            ps.setString(5,  userDTO.getUser_hp());
+            
+            
+            
+            ps.setString(10, userDTO.getUser_service());
+            return ps.executeUpdate();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        finally {
+            try{
+                 if(rs !=null ){rs.close();}
+                 if(ps !=null ){ps.close();}
+                 if(conn !=null ){conn.close();}
+            }
+            catch(Exception e){                    
+            } 
+        }
+        return -1;
+    }
+}

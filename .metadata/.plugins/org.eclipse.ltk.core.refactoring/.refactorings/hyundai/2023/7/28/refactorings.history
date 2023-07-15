@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;hyundai/src/main/webapp/icCheckAction.jsp&apos; to &apos;idCheckAction.jsp&apos;" description="Rename resource &apos;icCheckAction.jsp&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/webapp/icCheckAction.jsp" name="idCheckAction.jsp" stamp="1688988329443" updateReferences="true"/>
+</session>
