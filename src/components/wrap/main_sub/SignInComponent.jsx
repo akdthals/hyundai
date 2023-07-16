@@ -72,7 +72,7 @@ function SignInComponent({onSignInOff}) {
             .then((res)=>{
                 if(res.status===200){
                     const result = res.data;
-                    console.log(result);
+                    console.log(res);
                     try {                    
                         if( result.case === -1 ){
                             setState({
@@ -89,7 +89,9 @@ function SignInComponent({onSignInOff}) {
                             })
                         }
                         else{
+                            console.log(result);
                             sessionStorage.setItem('user_id', result.아이디);
+                            
                             setState({
                                 ...state,
                                 isIdError: false,

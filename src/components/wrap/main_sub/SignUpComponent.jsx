@@ -108,7 +108,7 @@ function SignUpComponent({timer, timerCounterfn, 회원가입, confirmModalOpen}
                 clearInterval(setId);
                 setState({
                     ...state,
-                    휴대폰: `${state.hp1}-${state.hp2}-${state.hp3}`,
+                    핸드폰: `${state.hp1}-${state.hp2}-${state.hp3}`,
                     인증여부: true
                 })
             }
@@ -373,25 +373,25 @@ function SignUpComponent({timer, timerCounterfn, 회원가입, confirmModalOpen}
     }
 
     const onChangeHp=(e)=>{
-        let 휴대폰 = e.target.value.replace(/[^\d]/g, '');
+        let 핸드폰 = e.target.value.replace(/[^\d]/g, '');
 
-        if (휴대폰.length > 10) {
-        휴대폰 = 휴대폰.replace(/^(\d{3})(\d{4})(\d{4})$/, '$1-$2-$3');
+        if (핸드폰.length > 10) {
+        핸드폰 = 핸드폰.replace(/^(\d{3})(\d{4})(\d{4})$/, '$1-$2-$3');
         } 
-        else if (휴대폰.length > 6) {
-        휴대폰 = 휴대폰.replace(/^(\d{3})(\d{3})(\d{4})$/, '$1-$2-$3');
+        else if (핸드폰.length > 6) {
+        핸드폰 = 핸드폰.replace(/^(\d{3})(\d{3})(\d{4})$/, '$1-$2-$3');
         }
-        else if (휴대폰.length > 3) {
-            휴대폰 = 휴대폰.replace(/^(\d{3})(\d{1,})$/, '$1-$2');
+        else if (핸드폰.length > 3) {
+            핸드폰 = 핸드폰.replace(/^(\d{3})(\d{1,})$/, '$1-$2');
         }
         setState({
             ...state,
-            휴대폰: 휴대폰,
+            핸드폰: 핸드폰,
         })
-        if(휴대폰.length>=12){
+        if(핸드폰.length>=12){
             setState({
                 ...state,
-                휴대폰: 휴대폰,
+                핸드폰: 핸드폰,
                 isHpError:false,
                 isHpMsg:''
             })
@@ -399,9 +399,9 @@ function SignUpComponent({timer, timerCounterfn, 회원가입, confirmModalOpen}
         else {
             setState({
                 ...state,
-                휴대폰: 휴대폰,
+                핸드폰: 핸드폰,
                 isHpError:true,
-                isHpMsg:'휴대폰 번호를 입력해주세요'
+                isHpMsg:'핸드폰 번호를 입력해주세요'
             })
         }
     }
@@ -512,7 +512,7 @@ function SignUpComponent({timer, timerCounterfn, 회원가입, confirmModalOpen}
             confirmModalOpen('생년월일을 제대로 입력하세요');
         }
         else if(state.isPwError===true){
-            confirmModalOpen('휴대폰 번호를 제대로 입력하세요');
+            confirmModalOpen('핸드폰 번호를 제대로 입력하세요');
         }
         else if(state.user_addr1===''){
             confirmModalOpen('주소를 검색 해주세요');
@@ -541,7 +541,7 @@ function SignUpComponent({timer, timerCounterfn, 회원가입, confirmModalOpen}
         "user_pw":          state.비밀번호,
         "user_name":        state.이름,
         "user_birth":       state.생년월일,
-        "user_hp":          state.휴대폰,
+        "user_hp":          state.핸드폰,
         "user_addr1":       state.주소1,
         "user_addr2":       state.주소2,
         "user_agree":       약관동의문자열
@@ -585,7 +585,7 @@ function SignUpComponent({timer, timerCounterfn, 회원가입, confirmModalOpen}
                             <div className="chapter1">
                                 <h2><strong>1단계</strong> <span>간편인증 방법 선택</span></h2>
                                 <ul className="choice-box">
-                                    <li><a href="!#" className='hp on'>휴대폰 인증</a></li>
+                                    <li><a href="!#" className='hp on'>핸드폰 인증</a></li>
                                     <li><a href="!#" className='email'>이메일 인증</a></li>    
                                 </ul>
 
@@ -595,7 +595,7 @@ function SignUpComponent({timer, timerCounterfn, 회원가입, confirmModalOpen}
                                     <>
                                         <div className="hp-box">
                                             <div className="hp-input">
-                                                <h4>휴대폰번호</h4>
+                                                <h4>핸드폰번호</h4>
                                                 <select name="hp1" id="hp1" onChange={onChangeHp1}>
                                                     <option value="010">010</option>
                                                     <option value="011">011</option>
@@ -610,12 +610,12 @@ function SignUpComponent({timer, timerCounterfn, 회원가입, confirmModalOpen}
                                             <div className="hp-auth">
                                                 <input maxLength={6} onChange={onChangeHpOk} value={state.입력인증번호}name='hp_auth' id='hpAuth' type="text" placeholder='번호확인' />
                                                 <span className={`hp-timer-counter${isTimer ?' on':''}`}>유효시간 {minutes<10?`0${minutes}`:minutes}:{seconds<10?`0${seconds}`:seconds}</span>
-                                                <button onClick={onClickHpNum2}>휴대폰 인증</button>
+                                                <button onClick={onClickHpNum2}>핸드폰 인증</button>
                                             </div>
                                             <div className="text-box">
-                                                <p>- 휴대폰으로 발송된 인증번호를 입력하세요. (3분 이내)</p>
+                                                <p>- 핸드폰으로 발송된 인증번호를 입력하세요. (3분 이내)</p>
                                                 <p>- 인증번호가 도착하지 않을 시에는 재발송을 해주세요.</p>
-                                                <p>- 입력한 휴대폰번호는 고객님 동의없이는 공개, 또는 제 3자에게 제공되지 않으며, 보안시스템을 통해 안전하게 관리됩니다.</p>
+                                                <p>- 입력한 핸드폰번호는 고객님 동의없이는 공개, 또는 제 3자에게 제공되지 않으며, 보안시스템을 통해 안전하게 관리됩니다.</p>
                                             </div>
                                         </div>
 
@@ -677,8 +677,8 @@ function SignUpComponent({timer, timerCounterfn, 회원가입, confirmModalOpen}
                                             <p className={`error-msg${ state.isBirthError  ? ' on' : ''}`}>{state.isBirthMsg}</p>
                                         </li>
                                         <li>
-                                            <input type="text" maxLength={13} placeholder='휴대폰번호' name='user_hp' id='userHp' value={state.휴대폰} onChange={onChangeHp}disabled={state.인증여부?false:true}/>
-                                            <span className={`validation-check ${  state.휴대폰==='' ? '' : (state.isHpError ? 'error' : 'ok')}`}></span>
+                                            <input type="text" maxLength={13} placeholder='핸드폰번호' name='user_hp' id='userHp' value={state.핸드폰} onChange={onChangeHp}disabled={state.인증여부?false:true}/>
+                                            <span className={`validation-check ${  state.핸드폰==='' ? '' : (state.isHpError ? 'error' : 'ok')}`}></span>
                                             <p className={`error-msg${ state.isHpError  ? ' on' : ''}`}>{state.isHpMsg}</p>
                                         </li>
                                         <li>
@@ -715,13 +715,13 @@ function SignUpComponent({timer, timerCounterfn, 회원가입, confirmModalOpen}
                                             <tr>
                                                 <td>가입</td>
                                                 <td>서비스 이용 및 상담</td>
-                                                <td>이메일, 성명, ID, 비밀번호, 생년월일, 휴대폰번호</td>
+                                                <td>이메일, 성명, ID, 비밀번호, 생년월일, 핸드폰번호</td>
                                                 <td rowSpan={3}>회원탈퇴시 또는 법정보유기간</td>
                                             </tr>
                                             <tr>
                                                 <td rowSpan={2}>구매 및 배송</td>
                                                 <td>구매 결제</td>
-                                                <td>결제정보(카드번호, 계좌번호, 휴대폰번호 등)</td>
+                                                <td>결제정보(카드번호, 계좌번호, 핸드폰번호 등)</td>
                                             </tr>
                                             <tr>
                                                 <td>물품배송</td>
@@ -751,12 +751,12 @@ function SignUpComponent({timer, timerCounterfn, 회원가입, confirmModalOpen}
                                             <tr>
                                                 <td rowSpan={2}>기타</td>
                                                 <td>신규 서비스/상품 안내/마케팅</td>
-                                                <td>이메일, 휴대폰번호, 성별, 스페셜데이</td>
+                                                <td>이메일, 핸드폰번호, 성별, 스페셜데이</td>
                                                 <td rowSpan={2}><span>회원탈퇴시 또는 동의철회시</span></td>
                                             </tr>
                                             <tr>
                                                 <td>현금영수증 발급, 앱설치 URL 전송</td>
-                                                <td>휴대폰번호</td>
+                                                <td>핸드폰번호</td>
                                             </tr>
                                         </tbody>
 									</table>
@@ -815,7 +815,7 @@ SignUpComponent.defaultProps={
         hp1: '010',
         hp2: '',
         hp3: '',
-        휴대폰:'',
+        핸드폰:'',
         isHpMsg: '',
         isHpError :false,
         

@@ -6,6 +6,7 @@
 %>
 
 <%@ page import = "hyundai.UserDAO" %>
+<%@ page import = "hyundai.UserDTO" %>
 
 <% 
     request.setCharacterEncoding("UTF-8"); 
@@ -18,11 +19,10 @@
   
         UserDAO userDAO = new UserDAO();
         int result = userDAO.signin( userDTO.getUser_id(), userDTO.getUser_pw() );
-        if(result==1){
-            session.setAttribute("user_id", userDTO.getUser_id());
-        } 
+        	String name=userDAO.getJoin(userDTO.getUser_id()).getUser_name();
+        			
 %>
-{"아이디": "<%=userDTO.getUser_id()%>","case": <%=result%>}
+{"아이디":"<%=userDTO.getUser_id()%>","case":<%=result%>}
 
 
 

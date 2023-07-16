@@ -24,16 +24,11 @@
 <body>
 <div id="wrap">
     
-    <%
-        String loginId = null;
-        if( session.getAttribute("user_id") != null){
-            loginId = (String) session.getAttribute("user_id");
-        }    
-    %>
+ 
 
     <%
         UserDAO userDAO = new UserDAO();
-        UserDTO userDTO = userDAO.getJoin( loginId );
+        UserDTO userDTO = userDAO.getJoin( request.getParameter("user_id"));
     %>
 
 

@@ -20,4 +20,6 @@
         int result = userDAO.delete( userDTO.getUser_id(), userDTO.getUser_pw() );
 %>
 
+<%=result%>
+
 

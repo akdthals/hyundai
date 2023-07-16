@@ -2,18 +2,19 @@ import React from 'react';
 import {Link, Routes, Route} from 'react-router-dom';
 import MemberUpdateComponent from './MemberUpdateComponent';
 import MypageIntroComponent from './MypageIntroComponent';
-
+import './scss/mypage.scss';
 function MypageComponent(props) {
     return (
         <main id="mypage">
             <div className="container">
                 <div className="gap">
-                    <div className="title"></div>
-                    <div className="content">
+                    <div className="title">
                         <ul className='mypage-header'>
                             <li><a href="!#">Home</a></li>
                             <li><a href="!#">마이현대</a></li>
                         </ul>
+                    </div>
+                    <div className="content">
                         <div className="leftarea">
                             <div className="title-box">
                                 <h2>마이현대</h2>
@@ -63,7 +64,7 @@ function MypageComponent(props) {
                                     <li>
                                         <h4>나의 정보</h4>
                                         <ul className="children-menu-box">
-                                            <li><a href="">회원정보변경</a></li>
+                                            <li><Link to="/mypageMain/memberupdate">회원정보변경</Link></li>
                                             <li><a href="">배송지 관리</a></li>
                                             <li><a href="">전용계좌/현금영수증 관리</a></li>
                                             <li><a href="">개인계정 연결관리</a></li>
@@ -75,8 +76,9 @@ function MypageComponent(props) {
                             </div>
                         </div>
                         <div className="rightarea">
-                            나누기
+                            <MypageIntroComponent/>
                             <MemberUpdateComponent/>
+                            
                         </div>
                         
                       

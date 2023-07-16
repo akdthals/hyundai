@@ -1,10 +1,11 @@
 import React from 'react';
+import './scss/mypage_intro.scss';
 
 function MypageIntroComponent(props) {
     return (
         <>
             <div className="member-header">
-                <span>(이름변수) 고객님의 등급은 <img src="" alt="" />입니다.</span>
+                <span>(이름변수) 고객님의 등급은 <figure></figure>입니다.</span>
                 <a href="">등급 쿠폰 다운받기</a>
                 <a href="">회원등급혜택</a>
             </div>
@@ -28,7 +29,7 @@ function MypageIntroComponent(props) {
                     </tbody>
                 </table>
             </div>
-            <div className="myclub-box">
+      {/*       <div className="myclub-box">
                 <h3>마이클럽</h3>
                 <span>클럽 가입하고 쿠폰/적립 혜택 받으세요!</span>
                 <button>가입하기</button>
@@ -44,7 +45,7 @@ function MypageIntroComponent(props) {
                     <h3>최근 주문 배송내역</h3>
                     <span>(최근 1개월 기준)</span>
                 </div>
-            </div>
+            </div>  */}
         
         
         </>

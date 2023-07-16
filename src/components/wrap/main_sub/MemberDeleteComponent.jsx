@@ -1,6 +1,48 @@
 import React from 'react';
+import axios from 'axios';
 
 function MemberDeleteComponent(props) {
+    const [pw, setPw]=React.useState('');
+    const onClickMemberDelete=(e)=>{
+        
+        e.preventDefault();
+        axios({
+            url:'/hyundai/deleteAction.jsp',
+            method: 'POST',
+            data:{},
+            params: {
+                "user_id": sessionStorage.getItem('user_id'),
+                "user_pw": pw,
+            }
+        })
+        .then((res)=>{
+            if(res.status===200){
+                const result = res.data;
+                console.log(result);
+                console.log(sessionStorage.getItem('user_id'));
+                try {                    
+                    if( result === 1 ){
+                     
+                        alert('탈퇴 성공! 이용해주셔서 감사합니다');
+                        setTimeout(function(){
+                         window.location.pathname = `/main`;
+                        }, 1000);
+                    }
+                  
+                    else{
+                        alert('올바른 비밀번호를 입력해주세요')
+                    }
+                } catch (error) {
+                    console.log( error );
+                }
+            }
+            
+        })
+        .catch((err)=>{
+            console.log(`AXIOS 실패! ${err} `)
+        });  
+    }
+
     return (
        <section id="memberDelete">
             <div className="container">
@@ -45,9 +87,11 @@ function MemberDeleteComponent(props) {
                     <div className="last-box">
                         <p>진행중인 주문,교환,반품이 있을시 회원 탈퇴가 불가능합니다. 해당 사항을 완료 후 탈퇴를 하실 수 있습니다.</p>
                         <p>고객님께서 보유중이신 예치금이 있으실 경우 <strong>더현대닷컴 고객센터(1800-2233)</strong>로 문의 부탁드립니다.</p>
+                        <p>최종확인을 위해 비밀번호를 입력해주세요</p>
+                        <input type="password" onChange={(e)=>setPw(e.target.value)} value={pw}/>
                     </div>
                     <div className="btn-box">
-                        <button>회원탈퇴</button>
+                        <button onClick={onClickMemberDelete}>회원탈퇴</button>
                         <button>취소</button>
                     </div>
                 </div>

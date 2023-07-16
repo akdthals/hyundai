@@ -1,6 +1,57 @@
 import React from 'react';
 import axios from 'axios';
+import {Link, Outlet} from 'react-router-dom';
+import './scss/member_update.scss';
 function MemberUpdateComponent(props) {
+
+    //바인딩할 데이터 모음
+    const [member, setMember]=React.useState({
+        아이디: '',
+        이름: '',
+        생년월일: '',
+        핸드폰: '',
+        주소1: '',
+        주소2: '',
+        약관: '',
+        가입일: ''
+    })
+    //로그인한 아이디 axios로 전달
+    React.useEffect(()=>{
+        axios({
+            // 이름, 생년월일, 핸드폰번호를 전송한다.
+            url:'/hyundai/updateAction.jsp',
+            method: 'POST',
+            data:{},
+            params: {
+                "user_id": sessionStorage.getItem('user_id')
+            }
+        })
+        .then((res)=>{
+            console.log(res.data);
+            const result = res.data;
+            try { 
+                if( sessionStorage.getItem('user_id')!=null){
+                    setMember({
+                        ...member,
+                        아이디: result.아이디,
+                        이름: result.이름,
+                        생년월일: result.생년월일,
+                        핸드폰: result.핸드폰,
+                        주소1: result.주소1,
+                        주소2: result.주소2,
+                        약관: result.약관내용,
+                        가입일: result.가입일
+                    })
+                }                   
+               
+            } catch (error) {
+                console.log( error );
+            }
+        })
+        .catch((err)=>{
+            console.log(`AXIOS 실패! ${err} `)
+        }); 
+    },[]);
 
     const [state, setState]=React.useState({
         기존비밀번호: '',
@@ -12,7 +63,7 @@ function MemberUpdateComponent(props) {
     const onPwChange=(e)=>{
         e.preventDefault();
         axios({
-            // 이름, 생년월일, 휴대폰번호를 전송한다.
+            // 이름, 생년월일, 핸드폰번호를 전송한다.
             url:'/hyundai/updateAction.jsp',
             method: 'POST',
             data:{},
@@ -41,11 +92,12 @@ function MemberUpdateComponent(props) {
         }); 
     }
     return (
+        <>
         <section id="memberUpdate">
             <div className="container">
                 <div className="title"></div>
                 <div className="content">
-                    <div className="input-box">
+{/*                     <div className="input-box">
                         <ul>
                             <li>
                                 <label htmlFor="">더현대닷컴 아이디</label>
@@ -59,30 +111,26 @@ function MemberUpdateComponent(props) {
                             </li>
                         </ul>
                     </div>
-                    <button type="submit">확인</button>
-                </div>
-
-                {
-
-                    
+                    <button type="submit">확인</button> */}
+                      {
                     <div className="update-box">
                         <div className="title-box">
-
+                            <h3>회원정보</h3>
                         </div>
                         <div className="info-box">
                             <ul>
                                 <li>
                                     <span className="title">아이디</span>
-                                    <span className="information">아이디변수</span>
+                                    <span className="information"> {member.아이디}</span>
                                 </li>
                                 <li>
                                     <span className="title">이름</span>
-                                    <span className="information">아이디변수</span>
+                                    <span className="information">{member.이름}</span>
                                 </li>
-                                <li>
+                                <li className='pw-box'>
                                     <span className="title">비밀번호</span>
                                         <button>변경하기</button>
-                                        <div className="pw-box">
+                                        <div>
                                             <h4>비밀번호 변경</h4>
                                             <form action="" onSubmit={onPwChange}>
                                                 <input type="text" placeholder='기존 비밀번호' onChange={(e)=>{setState({...state,기존비밀번호:e.target.value})}} value={state.기존비밀번호} />
@@ -96,11 +144,11 @@ function MemberUpdateComponent(props) {
                                 </li>
                                 <li>
                                     <span className="title">생년월일</span>
-                                    <span className="information">아이디변수</span>
+                                    <span className="information">{member.생년월일}</span>
                                 </li>
                                 <li>
-                                    <span className="title">휴대폰 번호</span>
-                                    <span className="information">아이디변수</span>
+                                    <span className="title">핸드폰 번호</span>
+                                    <span className="information">{member.핸드폰}</span>
                                 </li>
                                 <li>
                                     <span className="title">더현대닷컴 마케팅정보 수신 동의 <strong>[선택]</strong></span>
@@ -115,15 +163,18 @@ function MemberUpdateComponent(props) {
 
                             <div className="delete-box">
                                 <p>탈퇴를 원하시면 우측의 회원탈퇴 버튼을 눌러주세요</p>
-                                <a href="">회원탈퇴</a>
+                                <Link to="/mypageMain/memberDelete">회원탈퇴</Link>
                             </div>
                         </div>
                     </div>
-
-
                 }
+                </div>
+
+              
             </div>
         </section>
+        <Outlet/>
+        </>
     );
 }
 
